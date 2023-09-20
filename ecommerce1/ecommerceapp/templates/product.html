@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+      welcome to Abc store where u can buys different items...
+
+{% endblock %}
+{% block title %}
+{% if category %}
+{{product.name}}-ABC STORE
+
+{% endif %}
+{% endblock %}
+{% block content %}
+
+<div>
+ <div class="row my_row_class">
+     <div class="mx-auto">
+  <p><a href="{% url 'ecommerceapp:allprocat' %}" data-width="200px" data-height="200px">Home</a> | <a href="{{product.category.get_url}}">{{product.category}}</a> | {{product.name}} </p>
+     </div>
+ </div>
+</div>
+<br>
+<div class="container">
+   <div class="row mx_auto">
+
+<div class="container mt-4">
+    <div class="row">
+    <div class="col-md-4">
+    <div class="row">
+<img src="{{product.image.url}}" alt="{{product.name}}" style="width: 300px; height: 300px; padding-bottom:30px">
+    </div>
+    </div>
+
+
+<div class="col-md-8">
+    <h3>{{product.name}}</h3>
+    <p style="font-size: 25px;"><b>₹ {{product.price}}</b></p>
+    <br>
+
+
+ <p class="my_title">Product Description</p>
+
+        <p class="text-justify my-rod-text">{{product.description}}</p>
+
+        {% if product.stock <= 0 %}
+        <p class="text-justify my_prod_text"><b>Out of stock</b></p>
+        {% else %}
+       <a class="btn btn-secondary" href="{% url 'cartapp:add_cart' product.id %}">Add to cart</a>
+           {% endif %}
+
+            </div>
+    </div>
+</div>
+
+</div>
+</div>
+{% endblock %}
